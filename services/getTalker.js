@@ -1,4 +1,4 @@
-import * as fs from 'fs/promises';
+const fs = require('fs').promises;
 
 const getTalkers = async () => {
   try {
@@ -6,7 +6,6 @@ const getTalkers = async () => {
     return JSON.parse(talkers);
   } catch (err) {
     console.error(err);
-    return null;
   }
 };
 
