@@ -6,18 +6,17 @@ const { email } = req.body;
     return res.status(404).json({ message: 'O campo email é obrigatório' });
   }
   if (!email.match(emailValidationRegex)) {
-    return res.status(404).json({ message: 'O email deve ter o formato \"email@email.com\"' });
+    return res.status(404).json({ message: 'O email deve ter o formato email@email.com' });
   }
-  
 };
 
 const passwordValidation = (req, res) => {
   const { password } = req.body;
   if (!password) {
-    return res.status(404).json({ message: 'O campo \"password\" é obrigatório' });
+    return res.status(404).json({ message: 'O campo password é obrigatório' });
   }
   if (password.length > 6) {
-    return res.status(404).json({ message: 'O \"password\" deve ter pelo menos 6 caracteres' });
+    return res.status(404).json({ message: 'O password deve ter pelo menos 6 caracteres' });
   }
 };
 
