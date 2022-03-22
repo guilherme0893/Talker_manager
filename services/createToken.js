@@ -1,9 +1,10 @@
 const crypto = require('crypto');
 
-function createCrypto() {
-  return crypto.randomBytes(16).toString('hex');
-}
+const token = () => crypto.randomBytes(8).toString('hex');
 
-module.exports = createCrypto;
+console.log(token());
+console.log(token().length);
+
+module.exports = token;
 
 // https://nodejs.org/api/crypto.html
