@@ -1,28 +1,26 @@
-const emailValidation = (req, res, next) => {
+const tokenValidation = (req, res) => {
+  // https://medium.com/@norbertofariasmedeiros/five-steps-como-gerar-um-random-token-em-javascript-1e1488a15d28;
+  const token = Math.random().toString(10).substring(2); // .length --> 16
+  return res.status(200).json({ token });
+};
+
+const loginData = (req, res, next) => {
+  const { email, password } = req.body;
 // email validatio https://www.horadecodar.com.br/2020/09/07/expressao-regular-para-validar-e-mail-javascript-regex/
-const emailValidationRegex = /\S+@\S+\.\S+/;
-const { email } = req.body;
+  const emailValidationRegex = /\S+@\S+\.\S+/;
   if (!email) {
-    return res.status(404).json({ message: 'O campo email é obrigatório' });
+    return res.status(400).json({ message: 'O campo "email" é obrigatório' });
   }
   if (!email.match(emailValidationRegex)) {
-    return res.status(404).json({ message: 'O email deve ter o formato email@email.com' });
+    return res.status(400).json({ message: 'O "email" deve ter o formato "email@email.com"' });
   }
-  next();
-};
-
-const passwordValidation = (req, res, next) => {
-  const { password } = req.body;
   if (!password) {
-    return res.status(404).json({ message: 'O campo password é obrigatório' });
+    return res.status(400).json({ message: 'O campo "password" é obrigatório' });
   }
-  if (password.length > 6) {
-    return res.status(404).json({ message: 'O password deve ter pelo menos 6 caracteres' });
+  if (password.length < 6) {
+    return res.status(400).json({ message: 'O "password" deve ter pelo menos 6 caracteres' });
   }
   next();
 };
 
-module.exports = {
-  emailValidation,
-  passwordValidation,
-};
+module.exports = { loginData, tokenValidation };
