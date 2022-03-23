@@ -1,9 +1,7 @@
 const router = require('express').Router();
-const { emailValidation, passwordValidation } = require('../middlewares/loginInfoConfirmation');
-const token = require('../services/createToken');
+const { emailValidation, 
+  passwordValidation, tokenValidation } = require('../middlewares/loginInfoConfirmation');
 
-router.post('/', emailValidation, passwordValidation, (req, res) => {
-  res.status(200).json({ token: token() });
-});
+router.post('/login', emailValidation, passwordValidation, tokenValidation);
 
 module.exports = router;
