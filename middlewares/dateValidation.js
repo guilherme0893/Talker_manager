@@ -1,12 +1,13 @@
+const dateFormatCheck = (date) => {
+  // https://www.regextester.com/99555  
+  const validation = /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i;
+  return validation.test(date);
+};
+
 const dateValidation = (req, res, next) => {
-  const { talk: { watchedAt } } = req.body;
-  const validation = /(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d/;
-  if (!watchedAt.match(validation)) {
-    return res.status(400).json({ message: 'O campo "watchedAt" deve ter o formato dd/mm/aaaa' });
-  }
-  if (!watchedAt || watchedAt === '') {
-    return res.status(400)
-    .json({ message: 'O campo "talk" é obrigatório e "watchedAt" e "rate" não podem ser vazios' });
+  const { talk } = req.body;
+  if (dateFormatCheck(talk.watchedAt) === false) {
+    return res.status(400).json({ message: 'O campo "watchedAt" deve ter o formato "dd/mm/aaaa"' });
   }
   next();
 };
