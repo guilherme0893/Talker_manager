@@ -1,11 +1,13 @@
-const loginValidation = (req, res) => {
-  // https://medium.com/@norbertofariasmedeiros/five-steps-como-gerar-um-random-token-em-javascript-1e1488a15d28;
-  const newToken = Math.random().toString(10).substring(2, 18); // .length ---> 16 substring remove o que vem antes do zero, 18-2 
-  return res.status(200).json({ token: newToken });
+const loginValidation = (req, res, next) => {
+  // https://www.geeksforgeeks.org/basic-authentication-in-node-js-using-http-header/;
+  const { authorization } = req.headers;
+  if (!authorization || authorization === '') {
+    return res.status(401).json({ message: 'Token não encontrado' });
+  }
+  if (authorization.length !== 16) {
+    return res.status(401).json({ message: 'Token inválido' });
+  }
+  next();
 };
 
-// const newToken = Math.random().toString(10).substring(2, 18);
-// console.log(newToken);
-// console.log(newToken.length);
-
-module.exports = loginValidation; // inverter o nome com o tokenvalidation
+module.exports = loginValidation;
