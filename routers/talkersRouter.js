@@ -11,6 +11,10 @@ const tokenValidation = require('../middlewares/tokenValidation');
 const rateValidation = require('../middlewares/rateValidation');
 const dateValidation = require('../middlewares/dateValidation');
 const talkValidation = require('../middlewares/talkValidation');
+// const ageAndNameValidation = require('../middlewares/ageAndNameValidation');
+// const dateAndRateValidation = require('../middlewares/dateAndRateValidation');
+
+const updateTalker = require('../middlewares/updateTalkers');
 
 router.get('/', talkers);
 
@@ -25,4 +29,8 @@ router.post('/', tokenValidation,
 nameValidation, ageValidation, talkValidation, 
 rateValidation, dateValidation);
 
-module.exports = router;
+// router.post('/', ageAndNameValidation, talkValidation, dateAndRateValidation, tokenValidation);
+
+router.put('/talker/:id', updateTalker);
+
+// module.exports = router;

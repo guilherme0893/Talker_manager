@@ -4,4 +4,8 @@ const loginValidation = (req, res) => {
   return res.status(200).json({ token: newToken });
 };
 
-module.exports = loginValidation;
+// const newToken = Math.random().toString(10).substring(2, 18);
+// console.log(newToken);
+// console.log(newToken.length);
+
+module.exports = loginValidation; // inverter o nome com o tokenvalidation

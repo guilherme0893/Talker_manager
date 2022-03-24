@@ -1,14 +1,8 @@
-const fs = require('fs').promises;
+const fs = require('fs');
 
 // https://nodejs.dev/learn/writing-files-with-nodejs
 // https://www.geeksforgeeks.org/node-js-fs-writefile-method/
-const fileWriter = async (path, file) => {
-  try {
-    await fs.writeFile(path, JSON.stringify(file));
-    return file;
-  } catch (error) {
-    console.error(error);
-  }
-};
+const fileWriter = async (path, file) => fs.writeFileSync(path, JSON.stringify(file));
+  // return writeFile;
 
 module.exports = fileWriter;

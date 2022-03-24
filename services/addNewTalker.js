@@ -1,14 +1,14 @@
 const fileWriter = require('./fileWriter');
-const fileReader = require('./fileReader');
+const getTalkers = require('./getTalker');
 
-const talkersFile = './talker.json';
+const talkerFile = './talker.json';
 
 const addNewTalker = async (req, res) => {
-  const talks = await fileReader(talkersFile);
+  const talks = await getTalkers();
   const { name, age, talk } = req.body;
-  talks.push({ name, age, id: talks.length + 1, talk });
-  await fileWriter('./talker.json', talks);
-  return res.status(201).json({ name, age, id: talks.length, talk });
+  talks.push({ id: talks.length + 1, name, age, talk });
+  fileWriter(talkerFile, talks);
+  return res.status(201).json({ id: talks.length, name, age, talk });
 };
 
 module.exports = addNewTalker;
