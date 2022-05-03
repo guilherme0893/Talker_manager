@@ -1,5 +1,5 @@
-const fileWriter = require('../services/fileWriter');
-const fileReader = require('../services/fileReader');
+const fileWriter = require('../../services/fileWriter');
+const fileReader = require('../../services/fileReader');
 
 const updateTalker = async (req, res) => {
   const { body } = req;

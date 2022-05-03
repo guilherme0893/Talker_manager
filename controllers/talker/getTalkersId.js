@@ -1,4 +1,4 @@
-const getTalkers = require('../services/getTalker');
+const getTalkers = require('../../services/getTalker');
 
 async function getTalkerId(req, res) {
   try {
